@@ -1,4 +1,11 @@
-# typescript / sass
+### Tonewheels
+
+A wheel based sequencer.
+
+[Open](https://andremichelle.github.io/tonewheels/)
+![alt screenshot](screenshot.png)
+
+### Build
 template repository for my typescript projects
 
 Make sure to have sass installed and run in the console:

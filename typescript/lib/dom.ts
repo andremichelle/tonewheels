@@ -263,6 +263,24 @@ export class ActionEvents implements Terminable {
     }
 }
 
+export type PointerEventCallback = (event: PointerEvent) => void
+export const pointer = (element: Element,
+                        onPointerDown: PointerEventCallback,
+                        onPointerMove: PointerEventCallback,
+                        onPointerUp: PointerEventCallback): void => {
+    const pointerMove = (event: PointerEvent) => onPointerMove(event)
+    const pointerUp = (event: PointerEvent) => {
+        window.removeEventListener("pointerup", pointerUp)
+        window.removeEventListener("pointermove", pointerMove)
+        onPointerUp(event)
+    }
+    element.addEventListener("pointerdown", (event: PointerEvent) => {
+        onPointerDown(event)
+        window.addEventListener("pointerup", pointerUp)
+        window.addEventListener("pointermove", pointerMove)
+    })
+}
+
 export class RenderRequest {
     private requested: boolean = false
 
